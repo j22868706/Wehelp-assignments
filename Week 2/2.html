@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+        <meta charset="utf-8">
+        <title>Week 2 taks-2</title>
+    </head>
+    <body>
+        <script>
+          function calculateSumOfBonus(data) {
+            const exchangeRate = 30;
+            const weightBonus = [];
+            const setWeight = [];
+
+            const dictPerformance = {
+              "above average": 2,
+              "average": 1,
+              "below average": 0
+            };
+
+            const dictRole = {
+              "CEO": 2,
+              "Engineer": 1,
+              "Sales": 1
+            };
+
+            for (let index = 0; index < data.employees.length; index++) {
+              const employee = data.employees[index];
+              const performanceLevel = employee.performance;
+              const role = employee.role;
+              let salary = employee.salary;
+
+            if (typeof salary === "string") {
+              if (salary.includes("USD")) {
+                const salaryValue = parseInt(salary.replace("USD", ""));
+                const salaryUSD = salaryValue * exchangeRate;
+                salary = salaryUSD;
+              } 
+              else {
+                salary = parseInt(salary.replace(",", ""));
+              }
+            }
+
+            const performanceFactor = dictPerformance[performanceLevel] || 0;
+            const roleFactor = dictRole[role] || 0;
+            const base = salary * (roleFactor + performanceFactor);
+            setWeight.push(base);
+          }
+
+          const sumSetWeight = setWeight.reduce((total, value) => total + value, 0);
+          const weightValue = 10000 / sumSetWeight;
+
+          for (const weight of setWeight) {
+            const bonus = Math.floor(weight * weightValue);
+            weightBonus.push(bonus);
+          }
+
+          const sumBonus = weightBonus.reduce((total, value) => total + value, 0);
+
+          console.log(sumBonus);
+        }
+
+          calculateSumOfBonus({
+            employees: [
+            {
+              name: "John",
+              salary: "1000USD",
+              performance: "above average",
+              role: "Engineer",
+            },
+            {
+              name: "Bob",
+              salary: 60000,
+              performance: "average",
+              role: "CEO",
+            },
+            {
+              name: "Jenny",
+              salary: "50,000",
+              performance: "below average",
+              role: "Sales",
+            },
+          ],
+        });
+        </script>
+    </body>
+</html>

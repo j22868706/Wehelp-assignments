@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+        <meta charset="utf-8">
+        <title>JavaScript運算符號</title>
+    </head>
+    <body>
+        <script>
+            function findAndPrint(msg) {
+                for (let name in msg) {
+                if (msg.hasOwnProperty(name)) {
+                    let message = msg[name];
+                    const keywords = new Set(["college", "legal age", "vote"]);
+                    for (let word of keywords) {
+                        if (message.includes(word)) {
+                            console.log(name);
+                        }
+                    }
+
+                    let words = message.split(" ");
+                    for (let i = 0; i < words.length; i++) {
+                        let word = words[i];
+                        if (!isNaN(word) && parseInt(word) > 17 && words.includes("years")) {
+                            console.log(name);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+            findAndPrint({
+                "Bob":"My name is Bob. I'm 18 years old.",
+                "Mary":"Hello, glad to meet you.",
+                "Copper":"I'm a college student. Nice to meet you.",
+                "Leslie":"I am of legal age in Taiwan.",
+                "Vivian":"I will vote for Donald Trump next week",
+                "Jenny":"Good morning."
+            });
+        </script>
+    </body>
+</html>
