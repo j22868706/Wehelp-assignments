@@ -3,32 +3,33 @@
     padding: 0;
     font-size: 20px;
 }
-header{
+body{
+    font-size: 20px;
+}
+.frame{
     display: flex;
+}
+.left{
+    flex:none;
     width:auto;
+    text-align: left;
 }
-.Logo{
-    flex: none;
-    width: 150px;
-    justify-content: flex-start;
-    text-align: center;
-}
-nav{
+.right{
     display: flex;
-    flex: auto;
+    flex:auto;
     justify-content: flex-end;
 }
-nav a{
-    color: black;
-    width: 100px;
-    flex: none;
-    transition: 0.5s;
-    text-decoration: none;
+.ham{
+    display: none;
+    flex:auto;
     justify-content: flex-end;
-    text-align: center;
+    align-items: center;
 }
-nav a:hover{
-    background-color: lightblue;
+.item{
+    flex:none; 
+    width:auto;
+    margin-right: 10px;
+    text-align: right;
 }
 .welcome{
     height: 250px;
@@ -120,4 +121,23 @@ nav a:hover{
         flex: 1 1 100%;
         background-color: lightblue;
     }
+    .left{
+        flex:none;
+        height: 48px;
+        width:200px;
+        line-height: 48px;
+    }
+    .ham{
+        display: flex;
+        flex:auto;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .item{
+        display: none;
+        flex:none; 
+        width:60px;
+        margin-right: 10px;
+        text-align: center;
+    } 
 }
