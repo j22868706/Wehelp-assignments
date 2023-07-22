@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+body{
+    font-size: 20px;
+}
+.frame{
+    display: flex;
+}
+.left{
+    flex:none;
+    width:auto;
+    text-align: left;
+}
+.right{
+    display: flex;
+    flex:auto;
+    justify-content: flex-end;
+}
+.ham{
+    display: none;
+    flex:auto;
+    justify-content: flex-end;
+    align-items: center;
+}
+.item{
+    flex:none; 
+    width:auto;
+    margin-right: 10px;
+    text-align: right;
+}
+.welcome{
+    height: 250px;
+    background-color: lightblue; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text{
+    width: 360px;
+    height: 40px;
+    text-align: center; 
+    font-size: 40px;
+}
+.wrapper{
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.items1{
+    height: 50px;
+    width: 380px;
+    display: flex;
+    background-color: lightblue;
+}
+.img1{
+    width: 80px;
+    height: 50px;
+}
+.pm{
+    padding-left: 10px;
+    padding-top: 15px;
+}
+.items2{ 
+    width: 180px;
+    background-color: lightblue;
+}
+.img2{
+    max-width: 100%;
+    height:auto;
+}
+.text1{
+    text-align: center;
+}
+@media (max-width: 1200px){
+    .wrapper{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .items1{
+        height: 50px;
+        width: 45%;
+        background-color: lightblue;
+        flex-grow:1;
+    }
+    .item3{
+        flex: 100%;
+    }
+    .items2{ 
+        width: 20%;
+        background-color: lightblue;
+        flex-grow: 1;
+    }
+    .img2{
+        max-width: auto;
+        height:auto;
+    }
+}   
+@media (max-width: 600px) and (min-width: 360px) {
+    .items1{
+        flex: 1 1 100%;
+        display: flex;
+        background-color: lightblue;
+    }
+    .items2{ 
+        flex: 1 1 100%;
+        background-color: lightblue;
+    }
+    .left{
+        flex:none;
+        height: 48px;
+        width:200px;
+        line-height: 48px;
+    }
+    .ham{
+        display: flex;
+        flex:auto;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .item{
+        display: none;
+        flex:none; 
+        width:60px;
+        margin-right: 10px;
+        text-align: center;
+    } 
+}

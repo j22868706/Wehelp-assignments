@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 body{
     font-size: 20px;
     margin-left: 0;
@@ -36,7 +40,7 @@ body{
     align-items: center;
 }
 .text{
-    width: 360px;px;height: 40px;
+    width: 360px;height: 40px;
     text-align: center; 
     font-size: 40px;
 }
@@ -383,4 +387,4 @@ body{
         margin-right: 10px;
         text-align: center;
     } 
-}
+    }
