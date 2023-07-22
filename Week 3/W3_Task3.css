@@ -49,6 +49,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    padding-bottom: 100px;
 }
 .container{
     display: flex;
@@ -60,25 +61,32 @@ body{
     width: 380px;
     display: flex;
     background-color: lightblue;
+    flex-grow:1;
 }
 .img1{
     width: 80px;
     height: 50px;
+    object-fit: cover;
 }
 .pm{
+    padding-top: 10px;
     padding-left: 10px;
-    padding-top: 15px;
+    padding-bottom: 10px;
+    text-align: center;
 }
 .items2{ 
-    width: 180px;
+    width: 183px;
     background-color: lightblue;
 }
 .img2{
-    max-width: 100%;
-    height:auto;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
 }
 .text1{
     text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 @media (max-width: 1200px){
     .wrapper{
@@ -94,12 +102,13 @@ body{
     }
     .items1{
         height: 50px;
+        width: 45%;
+        display: flex;
         background-color: lightblue;
-        flex-grow:1;
+        flex-grow: 1;
     }
-    .items1:nth-child(3) {
-        flex-basis: 100%;
-        max-width: 100%;
+    .item3{
+        flex: 100%;
     }
     .items2{ 
         width: 20%;
@@ -108,9 +117,8 @@ body{
     }
     .img2{
         max-width: auto;
-        height:auto;
     }
-}   
+}
 @media (max-width: 600px) and (min-width: 360px) {
     .items1{
         flex: 1 1 100%;

@@ -42,11 +42,10 @@ for mrt in mrt_list:
         mrt_attractions[mrt_title].append(attraction_title)
     else:
         mrt_attractions[mrt_title] = [attraction_title]
-    print(attraction_title)
+
 output_file = "mrt.csv"
 with open(output_file, "w", encoding = "utf-8", newline = "" ) as csvfile:  # writes the list to a file
     csv_writer = csv.writer(csvfile)
     for mrt, attractions in mrt_attractions.items():
-        attractions_str = ','.join(attractions)
-        csv_writer.writerow([mrt, attractions_str])
+        csv_writer.writerow([mrt] + attractions)
 print("Data successfully written to attraction.csv")

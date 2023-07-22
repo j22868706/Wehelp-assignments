@@ -24,7 +24,8 @@ def getData(url):
         if title.a != None:
             print("https://www.ptt.cc"+ title.a.get("href"))
     
-
+# for 
+# list 再 for 去跑
 
     nextLink = root.find("a", string="‹ 上頁")
     return nextLink["href"]

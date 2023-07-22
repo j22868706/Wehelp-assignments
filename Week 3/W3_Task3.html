@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="W3_Task3.css">
+    <title>Assignment - extra</title>
+</head>
+<body>
+    <header>
+        <div class="frame">
+            <div class="left">My Website</div>
+            <div class="right">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 4</div>
+            </div>
+            <div class="ham">
+                <img src="Ham.png" alt="">
+            </div>
+        </div>
+    </header>
+    <div class="welcome">
+        <div class="text">Welcome to MyHome</div>
+    </div>
+<body>
+    <div class="wrapper">
+        <div class="container" id="attraction-container"></div>
+    </div>
+    <script>
+        fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                const attractionContainer = document.getElementById("attraction-container");
+                data.result.results.forEach(function (attraction, index) {
+                    const stitle = attraction.stitle;
+                    const file = attraction.file;
+                    const attractionImageFirst = attractionImageFirstUrl(file);
+                    const attractionDiv = document.createElement("div");
+                    if (index < 2) {
+                    attractionDiv.classList.add("items1");
+                    const promotionDiv = document.createElement("div");
+                        attractionDiv.appendChild(promotionDiv);
+                    } else if (index === 2) {
+                    attractionDiv.classList.add("items1", "item3");
+                    const promotionDiv = document.createElement("div");
+                        attractionDiv.appendChild(promotionDiv);
+                    } else if (index < 15){
+                        attractionDiv.classList.add("items2");
+                        const textDiv = document.createElement("div");
+                        attractionDiv.appendChild(textDiv);
+                    }
+                    else {
+                        document.getElementById(id).style.display = 'none'; // hide
+                    }     
+
+                    const imageElement = document.createElement("img");
+                    imageElement.src = attractionImageFirst;
+                    imageElement.alt = stitle;
+                    if (index <3){
+                        imageElement.classList.add("img1");
+                        attractionDiv.appendChild(imageElement);
+                    } else{
+                        imageElement.classList.add("img2"); 
+                        attractionDiv.appendChild(imageElement);
+                    }
+
+                    const nameElement = document.createElement("div");
+                    if (index <3){
+                        nameElement.classList.add("pm"); 
+                        nameElement.textContent = stitle; 
+                        attractionDiv.appendChild(nameElement)
+                    } else {
+                        nameElement.classList.add("text1"); 
+                        nameElement.textContent = stitle; 
+                        attractionDiv.appendChild(nameElement);
+                    }
+                    attractionContainer.appendChild(attractionDiv);
+                });
+            });
+
+                function attractionImageFirstUrl(file) {
+                    const imageUrls = file.split("http");
+                    const attractionImageFirst = "http" + imageUrls[1];
+                    return attractionImageFirst;
+                }
+    </script>
+</body>
+</html>
