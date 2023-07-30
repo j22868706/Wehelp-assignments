@@ -1,0 +1,62 @@
+*{
+   padding:0 ;
+}
+html,body{
+    height:100%;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login{
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid lightgray;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form h2{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    text-align: center;    
+}
+.form .group{
+    margin-bottom: 20px;
+}
+.form label{
+    line-height: 2;
+}
+.form input{
+    width: 100%;
+    border: 1px solid lightgray;
+    line-height: 3;
+    border-radius: 5px;
+}
+.form .btns{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.form .btn{
+    font-size: 20px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    background-color: lightblue;
+    width: 190px;
+    align-items: center;    
+}
+.form .btn:hover{
+    background-color: skyblue;
+    transition: 0.7s;
+}
+#check:checked{
+    accent-color: lightblue;
+}
