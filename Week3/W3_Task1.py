@@ -2,7 +2,8 @@
 import urllib.request as request
 import json
 import re
-import csv
+# allows user to read from and write to CS
+import csv 
 
 
 src = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json"
@@ -11,8 +12,9 @@ with request.urlopen(src) as response:
 
 # extracts the list of attractions from JSON file
 attraction_list = data["result"]["results"]
-with open("attraction.csv", "w", encoding = "utf-8", newline = "" ) as file:  # writes the list to a file
-    csv_writer = csv.writer(file)
+# writes the list to the file. 
+with open("attraction.csv", "w", encoding = "utf-8", newline = "" ) as file:  
+    csv_writer = csv.writer(file) # crates a CSV writer object
 
     for attraction in attraction_list:
         attraction_title = attraction["stitle"]
@@ -20,14 +22,17 @@ with open("attraction.csv", "w", encoding = "utf-8", newline = "" ) as file:  # 
         attraction_longitude = attraction["longitude"]
         attraction_file = attraction["file"]
     
-        match_attraction_address = re.search(r'\S+區', attraction_address) #matches a sequence of non-whitespace characters followed by the character "區" in a string.
+        #matches a sequence of non-whitespace characters followed by the character "區" in a string.
+        match_attraction_address = re.search(r'\S+區', attraction_address) 
+
         if match_attraction_address:
             extracted_district = match_attraction_address.group()
 
         split_attraction_file = attraction_file.split("https://")
         extracted_url = "https://" + split_attraction_file[1]
         
-        csv_writer.writerow([attraction_title, extracted_district, attraction_longitude, extracted_url])
+        # to write all the row from the list to the CSV file in a single call
+        csv_writer.writerow([attraction_title, extracted_district, attraction_longitude, extracted_url]) 
 
 
 mrt_list = data["result"]["results"]

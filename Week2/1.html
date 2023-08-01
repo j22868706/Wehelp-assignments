@@ -9,7 +9,7 @@
         <script>
             function findAndPrint(msg) {
                 for (let name in msg) {
-                if (msg.hasOwnProperty(name)) {
+                    if (msg.hasOwnProperty(name)) {
                     let message = msg[name];
                     const keywords = new Set(["college", "legal age", "vote"]);
                     for (let word of keywords) {
