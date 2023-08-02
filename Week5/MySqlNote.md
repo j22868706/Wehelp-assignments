@@ -15,7 +15,7 @@
   - Data types
     - BIGINT: a large integer.
     - INT: a medium integer.
-      - UNSIGNED: defalut 0; 
+      - UNSIGNED: defalut 0;
     - DATETIME: a date and time combination
       - CURRENT_TIMESTAMP
   - NOT NULL: to enforces a column to NOT accept NULL values
