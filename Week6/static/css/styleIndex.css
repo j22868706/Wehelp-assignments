@@ -1,0 +1,78 @@
+*{
+   padding:0 ;
+}
+html,body{
+    height:100%;
+}
+body{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.login{
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid lightgray;
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.signup{
+    width: 500px;
+    height: 350px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid lightgray;
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.form h2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* padding-bottom: 20px;
+    padding-top: 20px; */
+    text-align: center;    
+}
+.form .group{
+    margin-bottom: 20px;
+    display: flex;
+    width: 400px;
+}
+.form label{
+    line-height: 2;
+    width: 100px;
+}
+.form input{
+    width: 100%;
+    border: 1px solid lightgray;
+    line-height: 3;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.form .btns{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form .btn{
+    font-size: 20px;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    background-color: lightblue;
+    width: 190px;
+    align-items: center;    
+}
+.form .btn:hover{
+    background-color: skyblue;
+    transition: 0.7s;
+}
+#check:checked{
+    accent-color: lightblue;
+}

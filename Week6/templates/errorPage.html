@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not found</title>    
+</head>
+<body style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+    <div style="width: 600px;height: 250px;background-color: white;
+        border-radius: 10px;border: 3px solid lightgray;
+        backdrop-filter: blur(5px);justify-content: center;
+        align-items: center;margin-top: 50px;">
+            <h2 style="margin-top: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            text-align: center; ">Invalid username or password</h2>
+            <p style="margin-top: 20px;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 18px; ">{{ message }}</p>
+            <div style=" text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;"> 
+            <a style="font-size: 20px;color:black; text-decoration:underline ;border:none;width: 190px;
+            text-align: center;" href="{{ url_for('home') }}">Return to homepage</a>
+    </div>
+    
+</body>
+</html>
