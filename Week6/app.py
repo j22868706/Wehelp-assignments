@@ -54,11 +54,31 @@ def signin():
 @app.route('/member')
 def memberPage():
     if "userName" in session:
-        userName = session["userName"]    
-        return render_template('successPage.html', userName=userName)
+        userName = session["userName"]
+        query = 'SELECT member.name, message.content FROM message JOIN member ON message.member_id = member.id;'
+        cursor = con.cursor()
+        cursor.execute(query)
+        messages = cursor.fetchall()
+        return render_template('successPage.html', userName=userName, messages=messages)
     else:
         return render_template('index.html')
 
+
+@app.route('/createMessage', methods=['POST'])
+def createMessage():
+    content = request.form.get('Messagecontent')
+    memberUsername = session.get('userName')
+
+    if memberUsername:  
+        cursor = con.cursor()
+        cursor.execute("SELECT id FROM member WHERE name = %s", (memberUsername,))
+        member_id = cursor.fetchone()
+    print(member_id)
+    if member_id:
+        cursor.execute("INSERT INTO message (member_id, content) VALUES (%s, %s)", (member_id[0], content))
+        con.commit()
+        cursor.close()
+    return redirect('/member')
 
 @app.route('/error', methods = ["GET"])
 def errorPage():

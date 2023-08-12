@@ -1,29 +1,58 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membership</title>    
-</head>
-<body style="display: flex;justify-content: center;align-items: center;">
-    <div style="width: 600px;height: 250px;background-color: white;
-        border-radius: 10px;border: 3px solid lightgray;
-        backdrop-filter: blur(5px);justify-content: center;
-        align-items: center;margin-top: 50px;">
-            <h2 style="margin-top: 20px;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            padding-top: 10px;
-            text-align: center; ">Login Successful</h2>
-            <div style="margin-top: 20px;
-            padding-bottom: 20px;
-            padding-top: 20px;
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 1000px;
+            border: 3px solid lightgray;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            align-items: center;
+        }
+        .column {
+            flex: 1;
+            padding: 20px;
             text-align: center;
-            font-size: 18px; ">{{userName}}, you have successfully logged into the membership page.</div>
-            <div style=" text-align: center;
-            margin-top: 20px;
-            margin-bottom: 30px;"> 
-            <a style="font-size: 20px;color:black; text-decoration:underline ;border:none;width: 190px;
-            align-items: center;" href="{{ url_for('signout') }}">Sign Out</a>
-    </div>    
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column" style="background-color: white;">
+            <h2>Login Successful</h2>
+            <p>{{userName}}, you have successfully logged into the membership page.</p>
+            <div style="text-align: center; margin-top: 20px;"> 
+                <a href="{{ url_for('signout') }}">Sign Out</a>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Message board</h2>
+            <form method="POST" action="{{ url_for('createMessage') }}">
+                <textarea name="Messagecontent" rows="4" cols="50"></textarea><br>
+                <button type="submit"> Post message </button>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Comments</h2>
+            <ul>
+                {% for message in messages %}
+                    <li style="font-size: 20px; text-align: left;">{{ message[0]}}: {{ message[1]}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
