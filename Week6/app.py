@@ -23,10 +23,10 @@ def singup():
     signupUsername=request.form["signupUsername"]
     signupPassword=request.form["signupPassword"]
     cursor=con.cursor()
-    cursor.execute("SELECT * FROM member")
-    memberData=cursor.fetchall()
+    cursor.execute("SELECT * FROM member Where username = %s", (signupUsername,))
+    signupMemberData=cursor.fetchall()
     
-    for signupRow in memberData:
+    for signupRow in signupMemberData:
         if signupRow[2] == signupUsername:
             return redirect('/error?message=That username is already taken.')
 
@@ -41,9 +41,9 @@ def signin():
     signinUsername=request.form["signinUsername"]
     signinPassword=request.form["signinPassword"]
     cursor=con.cursor()
-    cursor.execute("SELECT * FROM member")
-    memberData=cursor.fetchall()
-    for signinRow in memberData:
+    cursor.execute("SELECT * FROM member WHERE username = %s AND password = %s", (signinUsername, signinPassword,))
+    singinMemberData=cursor.fetchall()
+    for signinRow in singinMemberData:
         if signinRow[2] == signinUsername and signinRow[3] == signinPassword:
             session["userName"]= signinRow[1]
             return redirect('/member') 
