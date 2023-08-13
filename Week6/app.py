@@ -46,6 +46,7 @@ def signin():
     for signinRow in singinMemberData:
         if signinRow[2] == signinUsername and signinRow[3] == signinPassword:
             session["userName"]= signinRow[1]
+            session["userId"] = signinRow[0]
             return redirect('/member') 
         
     return redirect('/error?message=Username or password is not correct')
@@ -55,7 +56,7 @@ def signin():
 def memberPage():
     if "userName" in session:
         userName = session["userName"]
-        query = 'SELECT member.name, message.content FROM message JOIN member ON message.member_id = member.id;'
+        query = 'SELECT member.name, message.content FROM message JOIN member ON message.member_id = member.id ORDER BY message.time DESC;'
         cursor = con.cursor()
         cursor.execute(query)
         messages = cursor.fetchall()
@@ -67,17 +68,12 @@ def memberPage():
 @app.route('/createMessage', methods=['POST'])
 def createMessage():
     content = request.form.get('Messagecontent')
-    memberUsername = session.get('userName')
+    userId = session["userId"]
 
-    if memberUsername:  
-        cursor = con.cursor()
-        cursor.execute("SELECT id FROM member WHERE name = %s", (memberUsername,))
-        member_id = cursor.fetchone()
-    print(member_id)
-    if member_id:
-        cursor.execute("INSERT INTO message (member_id, content) VALUES (%s, %s)", (member_id[0], content))
-        con.commit()
-        cursor.close()
+    cursor=con.cursor()
+    cursor.execute("INSERT INTO message (member_id, content) VALUES (%s, %s)", (userId, content))
+    con.commit()
+    cursor.close()
     return redirect('/member')
 
 @app.route('/error', methods = ["GET"])
