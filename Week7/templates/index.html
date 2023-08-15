@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week-4 Assignment</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleIndex.css') }}">
+    <script src="{{ url_for('static', filename='javascript/appIndex.js') }}"></script>
+</head>
+<body>
+    <div class="signup">
+        <form class="form" id="signupForm" method="post" action="/signup">
+            <h2>Sign up</h2>
+            <div class="group">
+                <label for="user_id" style="padding-left: 5px; align-items: first baseline;">Name</label>
+                <input type="text" name="signupName"  id="signupName" style="padding-left: 5px;">
+            </div>
+            <div class="group">
+                <label for="user_password" style="padding-left: 5px;">Username</label>
+                <input type="text" name="signupUsername" id="signupUsername" style="padding-left: 5px;">
+            </div>
+            <div class="group">
+                <label for="user_password" style="padding-left: 5px;">Password</label>
+                <input type="password" name="signupPassword" id="signupPassword" style="padding-left: 5px;">
+            </div>
+            <div class="btns">
+                <button onclick= submitSignupForm(event) class="btn">Sign up</button>
+            </div>
+        </form>
+    </div>
+    <div class="login">
+        <form class="form" id="signinForm" method="post" action="{{ url_for('signin') }}">
+            <h2>Sign in</h2>
+            <div class="group">
+                <label for="user_id" style="padding-left: 5px;">Username</label>
+                <input type="text" name="signinUsername" id="signinUsername" style="padding-left: 5px;">
+            </div>
+            <div class="group">
+                <label for="user_password" style="padding-left: 5px;">Password</label>
+                <input type="password" name="signinPassword" id="signinPassword" style="padding-left: 5px;">
+            </div>
+            <div class="btns">
+                <button onclick= submitSigninForm(event) class="btn">Log In</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

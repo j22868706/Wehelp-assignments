@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership</title>    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1200px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 1000px;
+            border: 3px solid lightgray;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            align-items: center;
+            margin-top: 10px ;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+        .column1 {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        .userSearch {
+            flex-direction: column;
+        }
+        .userSearch input{
+            line-height: 3;
+            height: 30px;
+            width: 200px; 
+        }
+        .userSearch button{
+            width: 80px;
+            height: 36px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column1" style="background-color: white;">
+            <h2>Login Successful</h2>
+            <p>{{userName}}, you have successfully logged into the membership page.</p>
+            <div style="text-align: center; margin-top: 20px;"> 
+                <a href="{{ url_for('signout') }}">Sign Out</a>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Message board</h2>
+            <form method="POST" action="{{ url_for('createMessage') }}">
+                <textarea name="Messagecontent" rows="4" cols="50"></textarea><br>
+                <button type="submit"> Post message </button>
+            </form>
+        </div>
+        <div class="column">
+            <h2>Comments</h2>
+            <ul>
+                {% for message in messages %}
+                    <li style="font-size: 20px; text-align: left;">{{ message[0]}}: {{ message[1]}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div style="margin-bottom: 100px;">
+            <h2 style="text-align: center;">Search Username</h2>
+            <div class="userSearch">
+                <input type="text" id="searchUsernameInput" placeholder="Enter username">
+                <button id="searchUsernameButton">Search</button>
+                <div id="searchUsernameResult" style="font-size: 20px; text-align: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchUsernameButton = document.getElementById('searchUsernameButton');  
+        const searchUsernameInput = document.getElementById('searchUsernameInput');
+        const searchUsernameResult = document.getElementById('searchUsernameResult');
+    
+        searchUsernameButton.addEventListener('click', async () => {  
+            const searchUsername = searchUsernameInput.value;
+            if (searchUsername) {
+                try {
+                    const response = await fetch(`http://127.0.0.1:3000/api/member?username=${searchUsername}`);  // 修正这行的变量名
+                    const data = await response.json();
+                    if (data.data) {
+                        const member = data.data;
+                        searchUsernameResult.innerHTML = `
+                            <p>${member.name} (${member.username})</p>
+                        `;
+                    } else {
+                        searchUsernameResult.innerHTML = 'Username Not Found';
+                    }
+                } catch (error) {
+                    console.error('Error', error);
+                    searchUsernameResult.innerHTML = 'An error has occurred, please try again.';
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>
