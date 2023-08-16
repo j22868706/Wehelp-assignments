@@ -161,15 +161,17 @@ def updateMemberUsername():
         usernameUpdateMemberData = cursor.fetchall()
 
         if len(usernameUpdateMemberData) > 0 and usernameUpdateMemberData[0][1] == newName:
-                con.rollback()
-                usernameUpdateResponse = {"error": True}
+            con.rollback()
+            usernameUpdateResponse = {"error": True}
+            print(usernameUpdateResponse)
+
         else:
             query = "UPDATE member SET name = %s WHERE id = %s"
             cursor.execute(query, (newName, userId))  
             con.commit()
             cursor.close()
             usernameUpdateResponse = {"ok": True}
-
+            print(usernameUpdateResponse)
 
     return jsonify(usernameUpdateResponse)
 
