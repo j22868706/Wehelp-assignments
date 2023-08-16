@@ -1,5 +1,6 @@
 from flask import *
 import mysql.connector
+import json
 
 app=Flask (__name__, static_folder = "static", static_url_path = "/")
 app.secret_key = "MysecretkeyonlyIknow"
@@ -26,7 +27,7 @@ def singup():
     
     for signupRow in signupMemberData:
         if signupRow[2] == signupUsername:
-            return redirect('/error?message=That username is already taken.')
+            return redirect('/error?message=This username is already taken !')
 
     cursor.execute("INSERT INTO member (name, username, password) VALUES (%s, %s, %s)",
                    (signupName, signupUsername, signupPassword)) 
@@ -127,6 +128,7 @@ def apiMember():
     if userSearchMember:
         response = {
             "data": {
+                "id": userSearchMember["id"],
                 "name": userSearchMember["name"],
                 "username": userSearchMember["username"]
             }
@@ -135,6 +137,42 @@ def apiMember():
         response = {
             "data": None
         }
+    jsonResponse=json.dumps(response)
+    print(jsonResponse)
     return jsonify(response)
+
+@app.route('/api/member', methods=['PATCH'])
+def updateMemberUsername():
+    usernameUpdateResponse = {"error": True}
+
+    newName = request.json.get("name")
+    userId = session["userId"]
+
+    con = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="root1234",
+        database="website"
+    )
+
+    if newName:
+        cursor = con.cursor()
+        cursor.execute("SELECT * FROM member WHERE name = %s", (newName,))
+        usernameUpdateMemberData = cursor.fetchall()
+
+        if len(usernameUpdateMemberData) > 0 and usernameUpdateMemberData[0][1] == newName:
+                con.rollback()
+                usernameUpdateResponse = {"error": True}
+        else:
+            query = "UPDATE member SET name = %s WHERE id = %s"
+            cursor.execute(query, (newName, userId))  
+            con.commit()
+            cursor.close()
+            usernameUpdateResponse = {"ok": True}
+
+
+    return jsonify(usernameUpdateResponse)
+
+
 
 app.run(port=3000) 

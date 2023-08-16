@@ -46,7 +46,20 @@
         .userSearch button{
             width: 80px;
             height: 36px;
-            font-size: 15px;
+            font-size: 10px;
+        }
+        .usernameUpdate {
+            flex-direction: column;
+        }
+        .usernameUpdate input{
+            line-height: 3;
+            height: 30px;
+            width: 200px; 
+        }
+        .usernameUpdate button{
+            width: 120px;
+            height: 36px;
+            font-size: 10px;
         }
     </style>
 </head>
@@ -74,7 +87,7 @@
             {% endfor %}
             </ul>
         </div>
-        <div style="margin-bottom: 100px;">
+        <div style="margin-bottom: 50px;">
             <h2 style="text-align: center;">Search Username</h2>
             <div class="userSearch">
                 <input type="text" id="searchUsernameInput" placeholder="Enter username">
@@ -82,18 +95,24 @@
                 <div id="searchUsernameResult" style="font-size: 20px; text-align: center;"></div>
             </div>
         </div>
+        <div style="margin-bottom: 100px;">
+            <h2 style="text-align: center;">Change name</h2>
+            <div class="usernameUpdate">
+                <input type="text" id="newUsername" placeholder="Enter new name">
+                <button id="updateUsernameButton">Update Name</button>
+                <div id="updateUsernameResult"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        const searchUsernameButton = document.getElementById('searchUsernameButton');  
-        const searchUsernameInput = document.getElementById('searchUsernameInput');
-        const searchUsernameResult = document.getElementById('searchUsernameResult');
-    
-        searchUsernameButton.addEventListener('click', async () => {  
+        async function searchUsername() {
+            const searchUsernameInput = document.getElementById('searchUsernameInput');
+            const searchUsernameResult = document.getElementById('searchUsernameResult');
             const searchUsername = searchUsernameInput.value;
             if (searchUsername) {
                 try {
-                    const response = await fetch(`http://127.0.0.1:3000/api/member?username=${searchUsername}`);  // 修正这行的变量名
+                    const response = await fetch(`http://127.0.0.1:3000/api/member?username=${searchUsername}`);
                     const data = await response.json();
                     if (data.data) {
                         const member = data.data;
@@ -107,8 +126,43 @@
                     console.error('Error', error);
                     searchUsernameResult.innerHTML = 'An error has occurred, please try again.';
                 }
-            }
-        });
+             }
+        };
+
+        const searchUsernameButton = document.getElementById('searchUsernameButton');
+        searchUsernameButton.addEventListener('click', searchUsername);
+
+        async function updateUsername() {
+            const newUsernameInput = document.getElementById('newUsername');
+            const updateUsernameResult = document.getElementById('updateUsernameResult');
+            const newUsername = newUsernameInput.value;
+            if (newUsername) {
+                try {
+                const usernameUpdateResponse = await fetch('http://127.0.0.1:3000/api/member', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: newUsername
+                        })
+                    });
+                    const data = await usernameUpdateResponse.json();
+                    if (data.ok) {
+                        updateUsernameResult.innerHTML = 'Username updated successfully.';
+                    } else {
+                    updateUsernameResult.innerHTML = 'This name is already taken !';
+                    }
+                } catch (error) {
+                    console.error('Error', error);
+                    updateUsernameResult.innerHTML = 'An error has occurred, please try again.';
+                }
+                }
+            }; 
+        const updateUsernameButton = document.getElementById('updateUsernameButton');
+        updateUsernameButton.addEventListener('click', updateUsername);
+
+
     </script>
     
 </body>
