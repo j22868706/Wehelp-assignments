@@ -143,7 +143,6 @@ def apiMember():
 
 @app.route('/api/member', methods=['PATCH'])
 def updateMemberUsername():
-    # usernameUpdateResponse = {"error": True}
 
     newName = request.json.get("name")
     userId = session["userId"]
