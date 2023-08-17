@@ -143,7 +143,7 @@ def apiMember():
 
 @app.route('/api/member', methods=['PATCH'])
 def updateMemberUsername():
-    usernameUpdateResponse = {"error": True}
+    # usernameUpdateResponse = {"error": True}
 
     newName = request.json.get("name")
     userId = session["userId"]
@@ -156,22 +156,14 @@ def updateMemberUsername():
     )
 
     if newName:
-        cursor = con.cursor()
-        cursor.execute("SELECT * FROM member WHERE name = %s", (newName,))
-        usernameUpdateMemberData = cursor.fetchall()
-
-        if len(usernameUpdateMemberData) > 0 and usernameUpdateMemberData[0][1] == newName:
-            con.rollback()
-            usernameUpdateResponse = {"error": True}
-            print(usernameUpdateResponse)
-
-        else:
-            query = "UPDATE member SET name = %s WHERE id = %s"
-            cursor.execute(query, (newName, userId))  
-            con.commit()
-            cursor.close()
-            usernameUpdateResponse = {"ok": True}
-            print(usernameUpdateResponse)
+        cursor = con.cursor()       
+        query = "UPDATE member SET name = %s WHERE id = %s"
+        cursor.execute(query, (newName, userId))  
+        con.commit()
+        cursor.close()
+        usernameUpdateResponse = {"ok": True}
+    else:
+        usernameUpdateResponse = {"error": True}
 
     return jsonify(usernameUpdateResponse)
 
